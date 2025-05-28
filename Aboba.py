@@ -1,9 +1,6 @@
 import random
 import math
 
-import random
-import math
-
 class Percolation:
     def __init__(self, N):
         if N <= 0:
@@ -109,6 +106,7 @@ if __name__ == "__main__":
     print(f"stddev                  = {ps.stddev()}")
     conf = ps.confidence()
     print(f"95% confidence interval = ({conf[0]}, {conf[1]})")
+
    # Код для анализа времени выполнения
 
 class QuickFindUF:
