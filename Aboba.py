@@ -1,9 +1,6 @@
 import random
 import math
 
-import random
-import math
-
 class Percolation:
     def __init__(self, N):
         if N <= 0:
