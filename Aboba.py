@@ -1,8 +1,11 @@
 import random
 import math
 
+import random
+import math
+
 class Percolation:
-    def init(self, N):
+    def __init__(self, N):
         if N <= 0:
             raise ValueError("N must be > 0")
         self.N = N
@@ -40,9 +43,7 @@ class Percolation:
         return self.open_sites
 
     def _mark_full_sites(self):
-        # очищаем предыдущие метки
         self.full = [[False] * self.N for _ in range(self.N)]
-        # запускаем DFS от всех открытых ячеек верхнего ряда
         for j in range(self.N):
             if self.grid[0][j]:
                 self._dfs(0, j)
@@ -53,14 +54,14 @@ class Percolation:
         if not self.grid[i][j] or self.full[i][j]:
             return
         self.full[i][j] = True
-        self._dfs(i - 1, j)  # вверх
-        self._dfs(i + 1, j)  # вниз
-        self._dfs(i, j - 1)  # влево
-        self._dfs(i, j + 1)  # вправо
+        self._dfs(i - 1, j)
+        self._dfs(i + 1, j)
+        self._dfs(i, j - 1)
+        self._dfs(i, j + 1)
 
 
 class PercolationStats:
-    def init(self):
+    def __init__(self):
         self.results = []
 
     def doExperiment(self, N, T):
@@ -93,3 +94,18 @@ class PercolationStats:
 
     def confidence(self):
         return self._confidence
+
+
+# Пример использования:
+if __name__ == "__main__":
+    N = 20  # размер решетки
+    T = 30  # количество экспериментов
+
+    ps = PercolationStats()
+    ps.doExperiment(N, T)
+
+    print(f"Решетка: {N}x{N}, Экспериментов: {T}")
+    print(f"mean                    = {ps.mean()}")
+    print(f"stddev                  = {ps.stddev()}")
+    conf = ps.confidence()
+    print(f"95% confidence interval = ({conf[0]}, {conf[1]})")
